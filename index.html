@@ -1,13 +1,25 @@
-<button id="copyAndClose">複製並關閉</button>
-
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>自動複製並關閉</title>
+</head>
+<body>
 <script>
-document.getElementById("copyAndClose").addEventListener("click", () => {
+window.onload = () => {
+    // 複製文字
     navigator.clipboard.writeText("測試")
     .then(() => {
-        window.close(); // 這裡會成功，因為是由點擊事件觸發
+        console.log("已複製文字到剪貼簿");
     })
     .catch(err => {
-        alert("複製失敗: " + err);
+        console.error("複製失敗:", err);
+    })
+    .finally(() => {
+        // 嘗試關閉視窗
+        window.close();
     });
-});
+};
 </script>
+</body>
+</html>
