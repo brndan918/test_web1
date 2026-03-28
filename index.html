@@ -6,11 +6,25 @@
 </head>
 <body>
 <script>
+// 解析 URL 參數
+function getParam(name) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(name) || ""; // 沒有就回空字串
+}
+
 window.onload = () => {
-    // 複製文字
-    navigator.clipboard.writeText("測試")
+    // 從參數拿文字，支援換行和 Unicode
+    const textToCopy = getParam("text");
+
+    if (!textToCopy) {
+        console.warn("沒有要複製的文字");
+        return;
+    }
+
+    // 複製文字到剪貼簿
+    navigator.clipboard.writeText(textToCopy)
     .then(() => {
-        console.log("已複製文字到剪貼簿");
+        console.log("已複製文字到剪貼簿:", textToCopy);
     })
     .catch(err => {
         console.error("複製失敗:", err);
