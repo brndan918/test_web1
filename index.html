@@ -1,23 +1,14 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <title>Clipboard Test 1</title>
-</head>
-<body>
-  <h1>測試自動複製（Clipboard API）</h1>
-  <script>
-    window.onload = () => {
-      navigator.clipboard.writeText("測試")
-        .then(() => {
-          console.log("已複製文字到剪貼簿");
-          alert("已複製文字：測試");
-        })
-        .catch(err => {
-          console.error("複製失敗:", err);
-          alert("複製失敗，可能需要點擊或鍵盤事件才能操作");
-        });
-    };
-  </script>
-</body>
-</html>
+<button id="copyAndClose">複製並關閉</button>
+
+<script>
+document.getElementById("copyAndClose").addEventListener("click", () => {
+    navigator.clipboard.writeText("測試")
+    .then(() => {
+        alert("已複製文字：測試");
+        window.close(); // 這裡會成功，因為是由點擊事件觸發
+    })
+    .catch(err => {
+        alert("複製失敗: " + err);
+    });
+});
+</script>
