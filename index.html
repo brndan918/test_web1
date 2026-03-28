@@ -2,14 +2,22 @@
 <html>
 <head>
   <meta charset="UTF-8">
+  <title>Clipboard Test 1</title>
 </head>
 <body>
-  <button onclick="go()">點我</button>
-
+  <h1>測試自動複製（Clipboard API）</h1>
   <script>
-    function go() {
-      window.open("https://brndan918.github.io/test_web2/", "_blank");
-    }
+    window.onload = () => {
+      navigator.clipboard.writeText("測試")
+        .then(() => {
+          console.log("已複製文字到剪貼簿");
+          alert("已複製文字：測試");
+        })
+        .catch(err => {
+          console.error("複製失敗:", err);
+          alert("複製失敗，可能需要點擊或鍵盤事件才能操作");
+        });
+    };
   </script>
 </body>
 </html>
